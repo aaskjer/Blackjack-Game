@@ -97,7 +97,7 @@ Leaderboards can be reset on demand from the settings window, or automatically *
 
 [aaskjer on Twitch](https://twitch.tv/aaskjer)
 
-[Slot Machine Game on SB Discord](https://discord.com/channels/834650675224248362/1446889756297527530/1446889756297527530)
+[Blackjack Game on SB Discord](https://discord.com/channels/834650675224248362/1447648588694818836/1447648588694818836)
 
 [Streamer.bot](https://streamer.bot) / [nate1280](https://www.patreon.com/c/nate1280/home)
 
