@@ -13,6 +13,8 @@ Chat Games/Blackjack Game/Overlay/blackjack_state.json   ← live state the over
 Chat Games/Logs/BJG-log-yyyy-MM-dd.txt                   ← daily action log
 ```
 
+The overlay folder is the one part you can move — see the OBS Overlay section below.
+
 You should never need to edit these by hand — use the built-in Settings GUI instead.
 
 ---
@@ -57,7 +59,7 @@ The 🌙 / ☀️ button next to the Save row at the bottom of the settings wind
 | `split` | Everyone | Split a starting pair into two hands |
 | `insurance` | Everyone | Insure half your bet against a dealer blackjack |
 | `surrender` | Everyone | Forfeit half your bet and end the hand |
-| `quit` | Moderator | Cancel and get refunded — Moderators only for testing purposes |
+| `quit` | Moderator | Cancel and get refunded — only for testing purposes |
 | `repeat` | Everyone | Resend your last game message |
 | `!duel @user <bet>` | Everyone | Challenge another chatter |
 | `accept` / `decline` | Everyone | Answer whichever prompt is waiting on you |
@@ -90,9 +92,9 @@ Nothing breaks. Bets below **Minimum Bet** are raised up to it (the player still
 
 ---
 
-**Q: Can a player have two hands going at once?**
+**Q: Can a player have two games going at once?**
 
-No. Game state is keyed per platform *and* per user, so each player has one active hand at a time — but any number of players can be mid-hand simultaneously, and a Twitch round and a YouTube round never interfere with each other.
+No. Game state is keyed per platform *and* per user, so each player has one active game at a time — but any number of players can be mid-hand simultaneously, and a Twitch round and a YouTube round never interfere with each other.
 
 ---
 
@@ -128,9 +130,17 @@ Two behaviours, toggled by **Tie System: draw only 1 tie-break card** on the Gam
 
 **Q: How does a duel work?**
 
-`!duel @user <bet>` challenges a chatter. The opponent types `accept` or `decline`. Both stakes are held from the moment the challenge is made and refunded on decline, timeout, or a push. Both hands are dealt face up from one shared deck, the challenger acts first, then the opponent, then a showdown. There is no dealer and no house — points move directly between the two players.
+`!bjduel @user <bet>` challenges a chatter. The opponent types `accept` or `decline`. Both stakes are held from the moment the challenge is made and refunded on decline, timeout, or a push. Both hands are dealt face up from one shared deck, the challenger acts first, then the opponent, then a showdown. There is no dealer and no house — points move directly between the two players.
 
-The bet accepts all the same shortcuts as `!blackjack`, and order doesn't matter — `!duel 500 @user` works too.
+The bet accepts all the same shortcuts as `!blackjack`, and order doesn't matter — `!bjduel 500 @user` works too.
+
+---
+
+**Q: A duel is scrolling past in chat and players lose track of their hand. Can they see it again?**
+
+Yes — `repeat` works inside a duel. Either duelist can use it at any point and it reposts both hands (listed per hand if someone has split), the current pot, and who everyone is waiting on. It's read-only: it never advances the game or affects the turn timer.
+
+Outside a duel the same command resends your last game message, as before.
 
 ---
 
@@ -210,7 +220,14 @@ Add individual usernames under **Addicted Users** (comma-separated, matched case
 
 **Q: How do I stop certain users from playing at all?**
 
-Settings GUI → **⚙️ General → Blocked Groups**. Comma-separated list of Streamer.bot user groups, matched exactly. Unlike the Addicted list, blocked users can't start a game or a duel at all.
+Settings GUI → **⚙️ General → Blocked From Playing**. Two fields, and matching either one is enough:
+
+| Field | Matches |
+|-------|---------|
+| **Blocked Users** | Individual usernames, comma-separated, case-insensitive. A leading `@` is ignored, so pasting `@someuser` works. |
+| **Blocked Groups** | Streamer.bot user groups, comma-separated, matched exactly. |
+
+Unlike the Addicted list, blocked players can't start a game, can't start a duel, and can't accept a duel challenge. Their commands are ignored silently — no chat reply — so a blocked user can't spam the channel by retrying.
 
 ---
 
@@ -220,6 +237,7 @@ Settings GUI → **⚙️ General → Blocked Groups**. Comma-separated list of 
 
 - **Global Cooldown** — after any `!blackjack`, nobody can start another game until it expires.
 - **User Cooldown** — applies only to the individual player who just played.
+- Games from players who left the chat or do not respond anymore, ends automatically after some time.
 
 Both are set on the **⏱️ Cooldown** tab and applied directly to the Streamer.bot command via `CPH.CommandSetGlobalCooldownDuration` / `CPH.CommandSetUserCooldownDuration`. `0` disables either one.
 
@@ -250,10 +268,24 @@ The background is transparent, so it layers over any scene.
 
 ---
 
+**Q: Can I keep the overlay somewhere other than the Streamer.bot folder?**
+
+Yes. **Overlay Folder** on the OBS Overlay tab takes either form:
+
+| You type | Where it goes |
+|----------|---------------|
+| `Overlay` | `Chat Games\Blackjack Game\Overlay\` — a subfolder, as before |
+| `D:\Streaming\Overlays\Blackjack` | Exactly that path, anywhere on any drive |
+
+The line underneath the field shows the full path that will actually be used, and the 📂 button opens it in Explorer. The folder is created if it doesn't exist, and the overlay file is written there on the next game — no Streamer.bot restart needed. Repoint your OBS browser source at the new location afterwards.
+
+---
+
 **Q: The overlay is blank / not updating.**
 
 - Make sure the browser source points at the **local file**, not a URL.
-- The overlay reads `blackjack_state.json` from the same folder — if you copied the HTML somewhere else, it can't find it. Keep both files together, or just change the **Overlay Folder** setting instead of moving files.
+- Check the path shown under **Overlay Folder** matches what your browser source points at — if you changed the folder, the old file is still sitting where it was.
+- The overlay reads `blackjack_state.json` from its own folder, so both files must sit together. Change the **Overlay Folder** setting rather than moving the HTML by hand.
 - Refresh the browser source cache in OBS after the first install.
 
 ---
@@ -345,25 +377,11 @@ Settings GUI → **➕ More → 📜 Action Log**. It shows the current day's en
 
 ---
 
-## 🔔 Update Notifications
-
-**Q: How do I know when a new version is available?**
-
-Opening the Settings GUI checks GitHub for the latest release tag. If it's newer than what's installed, a popup offers to open the releases page.
-
-**Q: Can I check for updates without opening the Settings window?**
-
-Partially — You still have to trigger the `Test` trigger but if you press `Yes` in the update notification popup, the check won't open the GUI but the GitHub page instead.
-
----
-
 # Is Blackjack Game an AI Slop?
 Partially it is. This script has been developed with input from the streamer.bot community and is support by AI.
 But i spend a lot of time putting heart and soul in it and my goal was to create a robust and valid moderation tool for everyone and easy to use.
 I understand that people, especially IT savvy people, will dislike the project because of the use of AI and i absolutely understand and support their point of view.
 But i had a lot of fun making it as with all my other projects, so i used it to "learn" coding and used AI for something valuable.
-
----
 
 AI can create bugs and i am not a developer in classical terms. But i spend a reasonable amount of time fixing any bugs that occured while testing.
 If you still find bugs or have something to say, please let me hear it :)
