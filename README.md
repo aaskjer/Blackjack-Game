@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://github.com/aaskjer/Blackjack-Game/blob/main/Assets/logo.png?raw=true" alt="BJG banner" width="400" height="400"></p>
 
-Blackjack Game is a chat game built for streamer.bot, supporting obs, twitch, kick, and youtube.
+Blackjack Game is a chat game for streamer.bot. It runs on Twitch, Kick and YouTube, and draws itself on stream through OBS.
 
 ![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2Fany_text-Twitch%2C_Kick%2C_YouTube-white?label=supported%20plattform)
 ![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2Fany_text-streamer.bot-white?label=tool&color=%230b73ff)
@@ -14,79 +14,90 @@ Blackjack Game is a chat game built for streamer.bot, supporting obs, twitch, ki
 
 # Overview
 
-- Works on Twitch, YouTube, and Kick, each individually toggleable.
-- Chat plays a real hand of Blackjack against the dealer — `!blackjack <amount>`, or an alias like `all`, `half`, `quarter`, `random`, `max`, `1.5k`, `50%`, or nothing at all to use the configured default bet.
-- Full table rules: `hit`, `stand`, `double` down, `split` (with resplits and a max-hands limit), `surrender`, `insurance`.
-- Configurable dealer behaviour — stands on 16–21, 1–8 decks, reshuffle threshold, draw delay, and whether a tie is broken by a single extra card or by drawing until it breaks.
-- Special hands: natural Blackjack at a configurable payout, plus 5-Card Charlie (1.5x) and Triple 7s (2x) bonus wins.
-- **Duel Mode** — `!duel @user <bet>` lets chatters play against each other instead of the dealer. Points move directly between the two players, so the house never touches the economy.
-- Duels support splits and double downs as *raises* the opponent must accept, per-hand side pots, forfeits, and an optional double-or-nothing **Sudden Death** on a tie.
-- Optional "Addicted" list (individual users or whole Streamer.bot groups) with a payout cut, applied to duels too.
-- Exclude specific Streamer.bot groups from playing entirely.
-- Per-user and global cooldowns, plus a Max Games/Hour limit — all of which apply to duels as well.
-- Free Game mode for wager-free hands, with its own dedicated set of chat messages so nothing refers to points that were never wagered.
-- Auto-detects [Currency Core by StreamUP](https://streamup.tips/product/currency-core) and [LOYALTY POINTS by tawmae](https://tawmae.xyz/loyalty-points).
-- Every chat message is editable directly in the settings GUI — over 150 of them, grouped by phase with placeholder lists in the tooltips.
-- Statistics are written to 44 persisted Streamer.bot user variables (`bjg_*`), so any other action can read a player's record — `bjg_duelsWon`, `bjg_netProfit` — without involving this game at all.
-- Persistent daily log file with every hand played, filterable and searchable in the built-in log viewer.
-- Built-in WPF settings window with dark/light mode, tab navigation, live rule summaries, and a colour picker for the overlay.
-- **House Mode** — `!house` opens a real casino table: one dealer, up to 6 seated chatters, one shared shoe, everyone settled against a single dealer hand.
-- Three authentic rule sets (Vegas Strip, Atlantic City, European) with correct peek/no-peek, doubling, splitting, insurance and surrender behaviour per set.
+Three ways to play, all from the same set of rules:
+
+- **Against the dealer** — `!blackjack <amount>` deals a hand. The amount takes a number, a shortcut (`all`, `half`, `quarter`, `random`, `max`, `1.5k`, `50%`), or nothing at all to use the configured default bet.
+- **Against each other** — `!duel @user <bet>` puts two chatters head to head. Points move straight from one to the other, so the house never touches the economy.
+- **At a table** — `!house` seats up to six players against one dealer hand, under Vegas Strip, Atlantic City or European rules.
+
+And the rest of it:
+
+- Twitch, YouTube and Kick, each switched on separately.
+- Full table play: `hit`, `stand`, `double`, `split` with resplits and a hand limit, `surrender`, `insurance`, and `quit` for a refund before you act.
+- The dealer is yours to set: stands on 16 to 21, one to eight decks, reshuffle threshold, reveal delay, and whether a tie is broken by a single card or by drawing until it breaks.
+- Bonus hands settle on the spot: a natural blackjack at your chosen payout, plus 5-card Charlie at 1.5x and three sevens at 2x.
+- Duels take splits and doubles as *raises* the opponent has to agree to, with a side pot per hand, forfeits, and an optional double-or-nothing **sudden death** on a tie.
+- Three authentic **House Mode** rule sets, each with the right peek, doubling, splitting, insurance and surrender behaviour.
+- Every deadline looks after itself — the solo turn, a duel challenge, a duel turn, a raise, sudden death, the rule pick, the join window, a seat's turn. An abandoned hand refunds and closes itself instead of waiting for the next chat command.
+- An "Addicted" list for individual viewers or whole streamer.bot groups: they play on, but their winnings are cut and their cooldown is doubled.
+- Blocked viewers and blocked groups are dropped without a reply, so retrying cannot spam chat.
+- Per-player and global cooldowns for each mode separately, plus a hands-per-hour ceiling.
+- Free Game for wager-free hands, with its own set of chat lines so nothing mentions points that were never staked.
+- Picks up [Currency Core by StreamUP](https://streamup.tips/product/currency-core) and [LOYALTY POINTS by tawmae](https://tawmae.xyz/loyalty-points) on its own; anything else works by naming its variable.
+- All 170 chat lines are editable in the settings window, grouped by phase, each with its placeholder list and a live chat preview.
+- Statistics live in 50 persisted streamer.bot user variables (`bjg_*`), so any other action can read a player's record — `bjg_duelsWon`, `bjg_netProfit` — without involving this game at all.
+- A daily log file of every settled hand, searchable and filterable in the built-in viewer.
+- A WPF settings window with a flat page rail, dark and light themes, live rule summaries and a colour wheel for the overlay.
 
 ---
 
-## 🎮 How It Works
+## 🎮 Against the dealer
 
-Chat starts a hand with `!blackjack <bet>` (or a bet alias). Cards are dealt, the player acts, the dealer plays out, and the hand settles instantly.
+Chat deals in with `!blackjack <bet>`. Cards go out, the player acts, the dealer plays, and the hand settles at once.
 
 | Event | Trigger | Result |
 |---------|---------|---------|
-| 🃏 **Deal** | A viewer runs the blackjack command with a bet | The bet is deducted (unless Free Game) and two cards are dealt to the player and dealer. |
-| ✅ **Win** | Player beats the dealer, or the dealer busts | The bet is paid 1:1 and credited to the viewer's balance. |
-| 🔥 **Blackjack** | 21 on the first two cards | Pays the configured Blackjack multiplier on top of the returned stake. |
-| ⭐ **Special** | 5 cards without busting, or three 7s | 5-Card Charlie pays 1.5x, Triple 7s pays 2x. |
-| 💥 **Bust** | Hand goes over 21 | The bet is lost immediately. |
-| 🤝 **Push** | Player and dealer tie | The dealer draws to break the tie, or the stake is returned, depending on the tie rule. |
-| 🚫 **Blocked / Addicted** | Player is in a blocked group or on the Addicted list | Blocked players can't play at all; Addicted players play normally but with a payout cut. |
-| ⏱️ **Cooldown** | Player plays again too soon, or hits Max Games/Hour | A cooldown message is sent instead of a hand. |
+| 🃏 **Deal** | The blackjack command, with or without an amount | The stake is taken, unless Free Game is on, and two cards go to the player and one to the dealer |
+| ✅ **Win** | The player beats the dealer, or the dealer busts | Pays 1:1 — double the stake comes back |
+| 🔥 **Blackjack** | 21 on the first two cards | Pays the configured bonus on top of the returned stake |
+| ⭐ **Bonus hand** | Five cards without busting, or three sevens | 5-card Charlie pays 1.5x, three sevens pays 2x, whatever the dealer holds |
+| 💥 **Bust** | Over 21 | The stake is gone before the dealer plays |
+| 🤝 **Level** | Player and dealer tie | The dealer draws to break it — once, or until it breaks, depending on the tie rule |
+| 🚫 **Blocked or addicted** | A blocked group, or the Addicted list | Blocked viewers cannot play at all; addicted ones play normally with their winnings cut |
+| ⏱️ **Cooldown** | Playing again too soon, or past the hourly limit | A cooldown reply instead of a hand |
+| ⏰ **Walked away** | A hand left open | It closes itself: returned if it was never played, otherwise it stands and the dealer plays it out |
 
 ---
 
 ## ⚔️ Duel Mode
 
-Instead of the dealer, chat plays each other. One player challenges another with a bet, the challenged player accepts or declines, and the winner takes the pot.
+Two chatters, no dealer and no house. One challenges the other for a stake, the other accepts or declines, and the winner takes the pot.
 
-| Command | Info |
+| Command | What it does |
 |---------|---------|
-| `!duel @user <bet>` | Challenge a chatter — same bet shortcuts as `!blackjack`, and the order doesn't matter |
-| `accept` / `decline` | Answer whichever prompt is currently waiting on you |
-| `hit` / `stand` | Play your hand, same as a normal game |
-| `double` / `split` | Request a raise — the opponent has to agree, since it raises the stakes for both |
-| `quit` | Forfeit — your opponent takes the whole pot |
+| `!duel @user <bet>` | Challenges a chatter. Same bet shortcuts as `!blackjack`, and the order does not matter |
+| `accept` / `decline` | Answers whichever prompt is waiting on you |
+| `hit` / `stand` | Plays your hand, as at the table |
+| `double` / `split` | Asks for a raise — it lifts the stake for both, so the opponent has to agree |
+| `quit` | Forfeits, and the opponent takes the whole pot |
+| `repeat` | Posts both hands, the pot and whose turn it is |
 
-Both players are dealt face up from one shared deck, the challenger acts first, and a natural Blackjack stands automatically. Stakes are held from the moment of the challenge and refunded on decline, timeout, or a push. Insurance and surrender are dealer rules and are correctly unavailable here.
+Both hands are dealt face up from one shared shoe, the challenger acts first, and a natural blackjack stands by itself. Stakes are held from the moment of the challenge and returned on a decline, a timeout or a draw. Insurance and surrender are dealer rules, so a duel has neither.
 
 ---
 
 ## 🏠 House Mode
 
-A dealer on one side and up to 6 chatters on the other, all playing the same shoe. A moderator opens the table and picks the rule set, players take a seat with their own bet, everyone plays in seat order, then the dealer plays one hand and every seat is settled against it.
+One dealer against a row of seats, all playing the same shoe. A moderator opens the table and picks the rule set, viewers sit down with stakes of their own, everyone plays in seat order, then the dealer plays once and every seat is settled against that single hand.
 
-House Mode is played for real currency only — while Free Game is on, the table refuses to open.
+House Mode is played for real currency: while Free Game is on, the table refuses to open.
 
-| Command | Info |
+| Command | What it does |
 |---------|---------|
-| `!house [rules]` | Opens a table. Name the rule set directly to skip the menu (`!house vegas`), or answer the numbered menu with `!house 1` (Moderators only) |
-| `join <bet>` | Takes a seat while the join window is open — same bet shortcuts as `!blackjack` (`all`, `half`, `max`, `1.5k`, `50%`, ...) |
-| `deal` | Deals immediately instead of waiting out the join window (Moderators only) |
-| `hit` / `stand` | Play your hand when it's your turn |
-| `double` / `split` | Same as the normal game, subject to the table's rule set |
-| `insurance` / `surrender` | Only where the table's rule set offers them |
-| `repeat` | Reposts the table — the dealer's upcard, every seat's hand, and whose turn it is |
+| `!house [rules] [bet]` | Opens a table. Name the rule set to skip the menu (`!house vegas`), or answer the numbered menu with `!house 1`. A bet seats you at your own table |
+| `join <bet>` | Takes a seat while the join window is open — same bet shortcuts as `!blackjack` |
+| `deal` | Deals at once instead of waiting the window out |
+| `hit` / `stand` | Plays your hand when it is your turn |
+| `double` / `split` | Within whatever the rule set allows |
+| `insurance` / `surrender` | Only where the rule set offers them |
+| `quit` | Leaves the table. Before you have acted the stake comes back; after that the hand is played out |
+| `repeat` | Posts the dealer's upcard, every seat's hand and whose turn it is |
 
-### Rule Sets
+Opening a table and dealing early are worth keeping to moderators — set that on the triggers in streamer.bot, since the script itself does not check who is asking.
 
-Each set is individually toggleable, so you decide which ones the menu offers. With only one enabled the menu is skipped entirely; with none enabled no table can open.
+### Rule sets
+
+Each one is switchable, so you decide what the menu offers. With only one left the menu is skipped; with none, no table can open.
 
 | Rule set | Shoe | Dealer | Double | Split | Extras |
 |---------|---------|---------|---------|---------|---------|
@@ -94,38 +105,39 @@ Each set is individually toggleable, so you decide which ones the menu offers. W
 | **Atlantic City** | 8 decks | Stands soft 17, peeks | Any two cards, after a split too | Any two 10-value cards, up to 4 hands | Insurance, late surrender |
 | **European** | 2 decks | Stands soft 17, **no peek** | 9, 10 or 11 only, never after a split | Matching ranks only, 2 hands | No insurance, no surrender |
 
-All three pay Blackjack 3:2, give one card on split aces, and don't count 21 on split aces as a Blackjack. Because the European dealer never peeks, a dealer Blackjack there takes everything staked at that seat, including money added by doubling or splitting.
+All three pay blackjack 3:2, give split Aces one card each, and do not count 21 on split Aces as a blackjack. The European dealer not peeking is the one that changes how a hand feels: a dealer blackjack there takes everything staked at a seat, money added by doubling or splitting included.
 
-### At the Table
+### At the table
 
-- The table deals the moment every seat is taken, without waiting out the rest of the join window. If nobody sat down, it's dropped — nothing was staked, so nothing needs refunding.
-- Rule pick, join window, insurance window, and per-turn timeouts are all configurable; a seat that runs out its turn timer stands automatically and the game moves on.
-- Own minimum and maximum seat bet, separate from the normal game's limits.
-- Taking a seat can count against Max Games/Hour, and House Mode has its own global and per-user cooldowns. The Addicted payout cut applies to house wins, and Addicted players wait twice the house user cooldown.
-- The overlay renders the table as an arc of seats with a live seat counter before the deal, then every hand side by side against the one dealer hand.
-- House Mode has a separate section in the Scoreboard.
+- The table deals the moment the last seat fills, without waiting the window out. If nobody sat down it is simply dropped — nothing was staked, so nothing needs returning.
+- The rule pick, the join window, the insurance window and each seat's turn all have their own deadline. A seat that runs its turn out stands automatically and play moves on.
+- Its own minimum and maximum seat stake, separate from the table's.
+- Taking a seat can count against hands per hour, and House Mode has global and per-player cooldowns of its own. The addiction cut applies to house wins, and addicted players wait twice the house user cooldown.
+- The overlay curves the seats around the dealer, shows the open ones as dashed chips while the join window runs, then puts every hand side by side against the one dealer hand.
+- `!stats` reports a House breakdown of its own, on top of the hands and wins it already counts.
 
 ---
 
 ## 📺 OBS Overlay
 
-A self-contained browser source that renders the game live on stream, installed automatically into the overlay folder — no manual file copying. Add a Browser Source pointing at `blackjack_overlay.html`; the background is transparent so it layers over any scene.
+A self-contained browser source that draws the game live, installed into the overlay folder on its own — no copying files about. Point a Browser Source at `blackjack_overlay.html`; the background is transparent, so it sits over any scene.
 
-- Dealer and player hands with real card faces, suits, and colours, deal-in animations, hand values, bet amounts, and outcome badges.
-- Duels show both players facing off with a VS badge and the live pot, split hands stacked per side pot.
-- Prompt cards with an animated countdown ring for challenges, raises, and sudden-death offers — they expire on their own so the overlay never sits on a dead prompt.
-- Card scale, font size, card colors, background color and opacity, dealer name, and per-element toggles are all configurable from the OBS Overlay tab.
+- Real card faces, suits and colours for the dealer and every hand, with deal-in animations, totals, stakes and outcome badges.
+- Duels put the two players either side of a VS badge with the live pot between them, split hands stacked per side pot.
+- Prompt cards with a countdown ring for a pending challenge, a raise and a sudden-death offer. They count themselves down and disappear, so the overlay never sits on a dead prompt.
+- Scale, font scale, card colours, backdrop colour and opacity, the dealer's name and per-element switches all live on the Overlay page.
+- The folder can be a subfolder of the game directory or any full path on any drive, so the file can live with your other overlays.
+- Version-stamped and self-updating, keeping your previous file alongside as a `.bak`.
 
 ---
 
-
 ## 🏆 Leaderboard
 
-`!allstats` ranks a top list of players. 🥇🥈🥉 medals for the top three, configurable to 1–10 places, with optional hiding of the broadcaster and bot account.
+`!allstats` ranks players on **combined lifetime net** — table profit plus duel winnings — so someone who only ever duels is on the board too. 🥇🥈🥉 for the top three, one to ten places, and the broadcaster and bot account can be hidden; they are matched by user id, so a rename cannot put them back on.
 
-`!stats` reports a player's own record, including their duel record, duel blackjacks, busts, and forfeits.
+`!stats` reports one player's own record: hands, wins, blackjacks, busts, net, streaks, and the duel and House breakdowns.
 
-Leaderboards can be reset on demand from the settings window, or automatically **weekly or monthly** for running seasons.
+Leaderboards reset on demand from the settings window, or by themselves **weekly or monthly** for running seasons.
 
 ---
 
