@@ -17,14 +17,15 @@ Blackjack Game is a chat game for streamer.bot. It runs on Twitch, Kick and YouT
 Three ways to play, all from the same set of rules:
 
 - **Against the dealer** — `!blackjack <amount>` deals a hand. The amount takes a number, a shortcut (`all`, `half`, `quarter`, `random`, `max`, `1.5k`, `50%`), or nothing at all to use the configured default bet.
-- **Against each other** — `!duel @user <bet>` puts two chatters head to head. Points move straight from one to the other, so the house never touches the economy.
+- **Against each other** — `!bjduel @user <bet>` puts two chatters head to head. Points move straight from one to the other, so the house never touches the economy.
 - **At a table** — `!house` seats up to six players against one dealer hand, under Vegas Strip, Atlantic City or European rules.
 
 And the rest of it:
 
 - Twitch, YouTube and Kick. The game answers wherever its commands are set to fire, and works out which platform that was on its own.
 - Full table play: `hit`, `stand`, `double`, `split` with resplits and a hand limit, `surrender`, `insurance`, and `quit` for a refund before you act.
-- The dealer is yours to set: stands on 16 to 21, one to eight decks, reshuffle threshold, reveal delay, and whether a tie is broken by a single card or by drawing until it breaks.
+- A real shoe: one per platform, shared by every hand and duel there, holding one to eight decks until it runs down to the reshuffle threshold. Played cards stay out until then.
+- The dealer is yours to set: stands on 16 to 21, an optional peek for blackjack, a reveal delay, and whether a tie is broken by a single card or by drawing until it breaks.
 - Bonus hands settle on the spot: a natural blackjack at your chosen payout, plus 5-card Charlie at 1.5x and three sevens at 2x.
 - Duels take splits and doubles as *raises* the opponent has to agree to, with a side pot per hand, forfeits, and an optional double-or-nothing **sudden death** on a tie.
 - Three authentic **House Mode** rule sets, each with the right peek, doubling, splitting, insurance and surrender behaviour.
@@ -65,7 +66,7 @@ Two chatters, no dealer and no house. One challenges the other for a stake, the 
 
 | Command | What it does |
 |---------|---------|
-| `!duel @user <bet>` | Challenges a chatter. Same bet shortcuts as `!blackjack`, and the order does not matter |
+| `!bjduel @user <bet>` | Challenges a chatter. Same bet shortcuts as `!blackjack`, and the order does not matter |
 | `accept` / `decline` | Answers whichever prompt is waiting on you |
 | `hit` / `stand` | Plays your hand, as at the table |
 | `double` / `split` | Asks for a raise — it lifts the stake for both, so the opponent has to agree |
@@ -127,7 +128,24 @@ A self-contained browser source that draws the game live, installed into the ove
 - Prompt cards with a countdown ring for a pending challenge, a raise and a sudden-death offer. They count themselves down and disappear, so the overlay never sits on a dead prompt.
 - Scale, font scale, card colours, backdrop colour and opacity, the dealer's name and per-element switches all live on the Overlay page.
 - The folder can be a subfolder of the game directory or any full path on any drive, so the file can live with your other overlays.
+- Works however OBS opens it: as a Local file, from a `file:///` address or off a web server, OBS 33 included. Set it up in OBS creates a 1300 × 1080 source.
 - Version-stamped and self-updating, keeping your previous file alongside as a `.bak`.
+
+<p align="center">
+  <img alt="A House table on the overlay" src="Assets/screenshots/overlay-house.png" width="430">
+  <img alt="A duel on the overlay" src="Assets/screenshots/overlay-duel.png" width="380">
+</p>
+
+---
+
+## 🖥️ Settings window
+
+Ten pages in a rail, in a dark and a light theme: the table rules, duels, House Mode, who may play, the overlay, every chat line with a live preview, statistics and leaderboard resets, a searchable log of every hand and a rule summary drawn from the current settings. When a new release is out, the window says so.
+
+<p align="center">
+  <img alt="The Table page" src="Assets/screenshots/settings-table.png" width="400">
+  <img alt="The House page" src="Assets/screenshots/settings-house.png" width="400">
+</p>
 
 ---
 

@@ -86,7 +86,7 @@ Ctrl+S saves. Ctrl+1 to Ctrl+9 jump to the first nine pages in the rail's order.
 | `surrender` | Fold and keep half the bet |
 | `quit` | Cancel and take the stake back - before your first move |
 | `repeat` | Post your last game message again |
-| `!duel @user <bet>` | Challenge another chatter |
+| `!bjduel @user <bet>` | Challenge another chatter |
 | `accept` / `decline` | Answer whichever prompt is waiting on you |
 | `!house [rules] [bet]` | Open a table |
 | `join <bet>` / `deal` | Take a seat, or deal the table early |
@@ -150,6 +150,25 @@ Nothing is said in chat about it — the connection may already be gone — but 
 
 ---
 
+**Q: Is it one deck per hand, or a real shoe?**
+
+A real shoe. One per platform, shared by every hand and duel running there, exactly as a table deals every seat from the same
+shoe. A card that has been played stays out of it until the shoe is reshuffled, so what is left genuinely shifts as the night
+goes on and anyone paying attention can tell.
+
+Two settings on the Table page run it:
+
+| Setting | What it does |
+|---------|---------|
+| **Decks in the shoe** | One to eight 52-card decks shuffled together |
+| **Reshuffle at** | How little may be left before the played cards go back in and it is shuffled. Low means long runs and a count worth keeping; high means it is reshuffled so often that counting gets nobody anywhere |
+
+Changing either starts a fresh shoe on the next hand. A hand already in progress keeps the one it was dealt from, so its cards
+go back where they came from. House tables are the exception: a table's rule set picks its own deck count, and that shoe lives
+and dies with the table.
+
+---
+
 **Q: What are the bonus hands?**
 
 Both settle the moment they happen, whatever the dealer is holding:
@@ -184,9 +203,9 @@ Both are **off by default**. Turn them on under **🃏 Table → Optional rules*
 
 **Q: How does a duel run?**
 
-`!duel @user <bet>` calls someone out. They type `accept` or `decline`. Both stakes are held from the moment of the challenge and returned on a decline, a timeout or a draw. Both hands are dealt face up from one shared shoe, the challenger acts first, then the opponent, then the showdown. No dealer and no house: the points move from one viewer to the other.
+`!bjduel @user <bet>` calls someone out. They type `accept` or `decline`. Both stakes are held from the moment of the challenge and returned on a decline, a timeout or a draw. Both hands are dealt face up from one shared shoe, the challenger acts first, then the opponent, then the showdown. No dealer and no house: the points move from one viewer to the other.
 
-The bet takes the same shortcuts as the table, and the order does not matter — `!duel 500 @user` works too.
+The bet takes the same shortcuts as the table, and the order does not matter — `!bjduel 500 @user` works too.
 
 ---
 
@@ -418,10 +437,40 @@ The line under the field shows the full path it resolves to, and the ↗ button 
 
 **Q: The overlay is blank, or will not update.**
 
-- Check the browser source points at the **local file**, not a URL.
+Start with the OBS log (**Help → Log Files → View Current Log**). When the overlay cannot read the table state it says so there,
+once after ten seconds and then at most once a minute, in a line starting `[obs-browser: 'Blackjack Overlay'] Error: Blackjack
+overlay: cannot read the table state` — together with the address it was loaded from, which usually shows the problem straight away.
+
 - Check the path under **Overlay folder** against what the browser source points at. If you changed the folder, the old file is still sitting where it was.
-- The overlay reads `blackjack_state.json` out of its own folder, so both files have to sit together. Change the setting rather than moving the HTML by hand.
+- The overlay reads `blackjack_state.js` out of its own folder, so the files have to sit together. Change the setting rather than moving the HTML by hand.
+- Run any Blackjack command once. The state file is written by the game, so a fresh install has nothing to show until the first hand.
 - Refresh the browser source cache in OBS after the first install.
+
+**Local file** ticked is still the recommended way to add it, but the overlay no longer depends on it: it also works when the
+browser source points at the file through a `file:///` address, which used to leave it blank.
+
+---
+
+**Q: The overlay stopped showing after updating OBS to 33.**
+
+OBS 33 tightened how a browser source may read files from disk. The local-file handler that serves a "Local file" source now
+turns away any request unless the page itself was opened through it, and the OBS team has said they may drop that handler
+altogether in a later version.
+
+The overlay used to fetch its state through exactly that handler. It now loads the state as a small script file instead, which
+works whichever way OBS opened the page, and falls back to the old file where it can still be read. Update the game action
+and the overlay rewrites itself on the next command; your previous file is kept beside it as a `.bak`.
+
+With the old overlay, OBS 33.0.0 still shows a source that has **Local file** ticked. A source that points at a `file:///`
+address stays blank, and the OBS log repeats `blocked by CORS policy` for `blackjack_state.json`. Tick **Local file**, or update.
+
+---
+
+**Q: What size should the browser source be?**
+
+**1300 × 1080**, which is what **Set it up in OBS** creates. The overlay sizes everything in proportion to the source, so a
+different width or height changes the proportions as well; the overlay and text scale on the Overlay page adjust the size
+without touching the source.
 
 ---
 

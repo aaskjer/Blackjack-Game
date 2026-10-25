@@ -18,24 +18,32 @@ Enable the commands in streamer.bot's `Commands` tab. They arrive switched off, 
 
 Right-click `Test` in the trigger section and choose `Test Trigger` to open the settings window.
 
-<p align="center"><img alt="grafik" src="https://github.com/user-attachments/assets/1c7f7cdb-5fdd-4fb6-b802-f3eb6aedea48"> </p>
+<p align="center"><img alt="The Table page of the settings window" src="Assets/screenshots/settings-table.png" width="460"></p>
 
 Work through the pages in the rail, save, and you are playing. The game reads its settings fresh on every command, so nothing needs restarting.
 
-Three pages are worth a look before the first hand: **Table** for the stakes and the dealer, **Access** for the platforms you stream on and the points variable, and **Messages** if you want the game to sound like your channel.
+Three pages are worth a look before the first hand: **Table** for the stakes and the dealer, **Access** for the points variable and who may play, and **Messages** if you want the game to sound like your channel. Every chat line there comes with a live preview, filled in the way chat will see it.
+
+<p align="center"><img alt="The Messages page with its chat preview" src="Assets/screenshots/settings-messages.png" width="460"></p>
 
 # OBS Overlay
 
-<p align="center"><img alt="grafik" src="https://github.com/user-attachments/assets/80f527c8-6156-430b-98cc-3e9d9bfed429"> </p>
+<p align="center"><img alt="The Overlay page of the settings window" src="Assets/screenshots/settings-overlay.png" width="460"></p>
 
-Connect streamer.bot to OBS, set the connection number, scene and source name on the **Overlay** page, and press `Set up in OBS`. The game creates the scene and the browser source for you, pointing at the overlay file — move and resize it from there as you like.
+Connect streamer.bot to OBS, set the connection number, scene and source name on the **Overlay** page, and press `Set up in OBS`. The game creates the scene and a 1300 × 1080 browser source pointing at the overlay file — move and resize it from there as you like.
+
+Adding the source by hand works too: a Browser Source with **Local file** ticked, pointing at `blackjack_overlay.html` in the overlay folder. A source that points at a `file:///` address works as well, OBS 33 included.
 
 ## Examples
 
 ### Duel challenge
-<p align="center"><img alt="grafik" src="https://github.com/user-attachments/assets/daaccc2e-588a-4665-9672-b3a28cd92dd9"> </p>
+<p align="center"><img alt="A duel challenge waiting for its answer" src="Assets/screenshots/overlay-duel-challenge.png" width="320"></p>
 The challenged player has a deadline to accept or decline. Let it run out and the duel is off, with the stake returned.
 
 ### A duel in play
-<p align="center"><img alt="grafik" src="https://github.com/user-attachments/assets/6027414c-8282-4f23-8edb-74821dbac2b7"> </p>
+<p align="center"><img alt="A duel in play" src="Assets/screenshots/overlay-duel.png" width="480"></p>
 Every solo command works here except insurance and surrender — those are dealer rules, and a duel has no dealer.
+
+### A House table
+<p align="center"><img alt="A House table with four seats" src="Assets/screenshots/overlay-house.png" width="520"></p>
+The seats curve around the dealer. While the join window runs, the open ones show as dashed chips; once the cards are out, every hand plays against the one dealer hand.
