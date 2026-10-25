@@ -372,7 +372,7 @@ The Messages page has its own **bot account** and **send as /me** switches for c
 
 **Q: Can I change what the game says?**
 
-All 170 lines, on the Messages page. Pick one from the list, edit it, and the preview underneath shows how it will read in chat — filled in with sample values, sent from the account and in the style your switches are set to.
+All 169 lines, on the Messages page. Pick one from the list, edit it, and the preview underneath shows how it will read in chat — filled in with sample values, sent from the account and in the style your switches are set to.
 
 The chips under the editor are that message's placeholders; clicking one drops it in at the cursor. A placeholder the game does not fill for that particular line is not offered, so the preview cannot promise something chat will never see.
 
@@ -480,7 +480,11 @@ No. The current period is noted first and the reset waits for the next boundary.
 
 **Q: Which ones work?**
 
-Twitch, YouTube and Kick. Tick the ones you stream on under **Access → Platforms**. Commands from the others are ignored, `stats` and `allstats` included, and the game works out which platform a command came from on its own.
+Twitch, YouTube and Kick. There is nothing to switch on here: the game answers wherever its commands are set to fire, and works out
+which platform that was on its own, so points and statistics land on the right account.
+
+Which platforms a command fires on is Streamer.bot's own setting, on the trigger. Leave Kick off there and no Kick viewer can
+deal in — the game never needs to know about it.
 
 ---
 

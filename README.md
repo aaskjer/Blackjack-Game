@@ -22,7 +22,7 @@ Three ways to play, all from the same set of rules:
 
 And the rest of it:
 
-- Twitch, YouTube and Kick, each switched on separately.
+- Twitch, YouTube and Kick. The game answers wherever its commands are set to fire, and works out which platform that was on its own.
 - Full table play: `hit`, `stand`, `double`, `split` with resplits and a hand limit, `surrender`, `insurance`, and `quit` for a refund before you act.
 - The dealer is yours to set: stands on 16 to 21, one to eight decks, reshuffle threshold, reveal delay, and whether a tie is broken by a single card or by drawing until it breaks.
 - Bonus hands settle on the spot: a natural blackjack at your chosen payout, plus 5-card Charlie at 1.5x and three sevens at 2x.
@@ -34,7 +34,7 @@ And the rest of it:
 - Per-player and global cooldowns for each mode separately, plus a hands-per-hour ceiling.
 - Free Game for wager-free hands, with its own set of chat lines so nothing mentions points that were never staked.
 - Picks up [Currency Core by StreamUP](https://streamup.tips/product/currency-core) and [LOYALTY POINTS by tawmae](https://tawmae.xyz/loyalty-points) on its own; anything else works by naming its variable.
-- All 170 chat lines are editable in the settings window, grouped by phase, each with its placeholder list and a live chat preview.
+- All 169 chat lines are editable in the settings window, grouped by phase, each with its placeholder list and a live chat preview.
 - Statistics live in 50 persisted streamer.bot user variables (`bjg_*`), so any other action can read a player's record — `bjg_duelsWon`, `bjg_netProfit` — without involving this game at all.
 - A daily log file of every settled hand, searchable and filterable in the built-in viewer.
 - A WPF settings window with a flat page rail, dark and light themes, live rule summaries and a colour wheel for the overlay.
