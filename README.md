@@ -1,14 +1,17 @@
----
-
 <p align="center"><img src="https://github.com/aaskjer/Blackjack-Game/blob/main/Assets/logo.png?raw=true" alt="BJG banner" width="400" height="400"></p>
 
-Blackjack Game is a chat game for streamer.bot. It runs on Twitch, Kick and YouTube, and draws itself on stream through OBS.
+<p align="center">Blackjack Game is a chat game for streamer.bot. It runs on Twitch, Kick and YouTube, and draws itself on stream through OBS.</p>
 
-![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2Fany_text-Twitch%2C_Kick%2C_YouTube-white?label=supported%20plattform)
-![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2Fany_text-streamer.bot-white?label=tool&color=%230b73ff)
-![GitHub License](https://img.shields.io/github/license/aaskjer/Blackjack-Game)
-![GitHub Release](https://img.shields.io/github/v/release/aaskjer/Blackjack-Game)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/aaskjer/Blackjack-Game/total)
+<p align="center">
+  <img alt="Platform:" src="https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2Fany_text-Twitch%2C_Kick%2C_YouTube-white?label=supported%20plattform">
+  <img alt="tool: streamer.bot" src="https://img.shields.io/badge/tool-streamer.bot-0b73ff">
+  <a href="https://opensource.org/licenses/MIT"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow"></a>
+  </p>
+  <p align="center">
+  <img alt="Latest stable release" src="https://img.shields.io/github/v/release/aaskjer/Blackjack-Game?label=stable">
+  <img alt="Total downloads" src="https://img.shields.io/github/downloads/aaskjer/Blackjack-Game/total">
+  <img alt="GitHub stars" src="https://img.shields.io/github/stars/aaskjer/Blackjack-Game">
+</p>
 
 ---
 
