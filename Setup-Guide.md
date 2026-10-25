@@ -45,5 +45,8 @@ The challenged player has a deadline to accept or decline. Let it run out and th
 Every solo command works here except insurance and surrender — those are dealer rules, and a duel has no dealer.
 
 ### A House table
-<p align="center"><img alt="A House table with four seats" src="Assets/screenshots/overlay-house.png" width="520"></p>
+<p align="center">
+  <img alt="A House lobby with two of five seats taken" src="Assets/screenshots/overlay-house-lobby.png" width="380">
+  <img alt="A House table with four seats" src="Assets/screenshots/overlay-house.png" width="400">
+</p>
 The seats curve around the dealer. While the join window runs, the open ones show as dashed chips; once the cards are out, every hand plays against the one dealer hand.
