@@ -51,16 +51,6 @@ against a single dealer hand. The game answers on whichever platform the command
 - 💬 **169 chat lines, 50 stat variables.** Every message is editable with a live preview. Stats live in
   persisted `bjg_*` user variables, and the leaderboard ranks combined lifetime net from table and duels.
 
-<p align="center">
-  <img alt="A House table on the overlay" src="Assets/screenshots/overlay-house.png" width="430">
-  <img alt="A duel on the overlay" src="Assets/screenshots/overlay-duel.png" width="380">
-</p>
-
-<p align="center">
-  <img alt="The Table page" src="Assets/screenshots/settings-table.png" width="400">
-  <img alt="The House page" src="Assets/screenshots/settings-house.png" width="400">
-</p>
-
 ---
 
 ## Credits
