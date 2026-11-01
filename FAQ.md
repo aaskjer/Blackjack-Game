@@ -11,10 +11,10 @@ Three:
 | Action | What it is |
 |--------|---------|
 | **Blackjack Game** | The game. Every gameplay command points here |
-| **Blackjack Game - Settings** | Opens the settings window |
-| **Blackjack Game - Stats** | Handles `stats` and `allstats` |
+| **[BJG] - Settings** | Opens the settings window; downloads `UIFramework.dll` on the first open |
+| **Blackjack Leaderboard** | Handles `stats` and `allstats` |
 
-Point `stats` and `allstats` at the Stats action and everything else at the game action. The script matches on command ID, not on the word you type, so the trigger can be anything you like as long as the ID matches.
+Point `stats` and `allstats` at the Leaderboard action and everything else at the game action. The script matches on command ID, not on the word you type, so the trigger can be anything you like as long as the ID matches.
 
 ---
 
@@ -24,18 +24,30 @@ Under your Streamer.bot base directory:
 
 ```
 Chat Games/Blackjack Game/BJG-Settings.json              ← settings and chat messages
+Chat Games/Blackjack Game/uiframework.layout.json        ← your layout of the window: theme, renamed or hidden pages and fields
 Chat Games/Blackjack Game/Overlay/blackjack_overlay.html ← the OBS browser source
 Chat Games/Blackjack Game/Overlay/blackjack_state.json   ← the live state the overlay reads
 Chat Games/Logs/BJG-log-yyyy-MM-dd.txt                   ← one log file per day
+UIFramework/lib/<version>/UIFramework.dll                ← the settings window, downloaded on first open
 ```
 
 The overlay folder is the one piece you can move; see the Overlay section below. Nothing here needs editing by hand — the settings window writes all of it.
 
 ---
 
+**Q: What is UIFramework.dll, and why does the window want to download something?**
+
+The settings window is no longer part of the import. It lives in [UIFramework for streamer.bot](https://github.com/aaskjer/UIFramework-Streamer.bot), one window shared by all of these chat games, so a fix or a new feature there reaches every game at once. The `[BJG] - Settings` action only loads that DLL and hands it the game's settings table.
+
+The first open asks before fetching anything. `Yes` downloads the file from the UIFramework releases, checks it against the SHA-256 published next to it and puts it in `UIFramework\lib\<version>\` under your Streamer.bot folder. `No` opens that folder so you can place the file yourself. Later releases are offered the same way; `Cancel` skips one, and `"autoUpdate": false` in `uiframework.layout.json` stops the check altogether. The running DLL is never overwritten — a new one goes into its own version folder and is used from the next start.
+
+---
+
 **Q: The settings window will not open.**
 
 Look in the Streamer.bot log for the error, and [report it](https://github.com/aaskjer/Blackjack-Game/issues) if it looks like a defect.
+
+If the log says `UIFramework.dll was not found`, the download was declined or did not finish: open the window again and answer `Yes`, or put the DLL from the [UIFramework releases](https://github.com/aaskjer/UIFramework-Streamer.bot/releases) into `UIFramework\lib\<version>\` by hand.
 
 A damaged `BJG-Settings.json` does not stop the window: it says so and opens with the defaults instead. Saving from there writes a fresh file — which also means anything that was still readable in the damaged one is overwritten, so move it aside first if you want to pick anything out of it.
 
@@ -61,7 +73,13 @@ The one exception is a hand that is already on the table: it keeps the rules it 
 
 **Q: Where is dark mode?**
 
-The ☀️ / 🌙 button at the bottom left. The window reopens in the other theme, since the whole tree is rebuilt in the new palette rather than recoloured in place.
+The ☀️ / 🌙 button at the bottom left. The window reopens in the other theme, since the whole tree is rebuilt in the new palette rather than recoloured in place. The choice is kept in `uiframework.layout.json` and shared with every other window built on UIFramework.
+
+---
+
+**Q: Can I rearrange the window?**
+
+Yes. The pencil at the bottom left switches to the customise mode: drag a field onto another to reorder it, onto a page in the rail to move it there, right-click for *Rename*, *Hide* and *Move to page*; pages can be renamed, reordered, given another icon or hidden the same way. The bar on top picks the accent colour and the language of the shared labels, and *Reset layout* puts everything back. It all lives in `uiframework.layout.json` next to `BJG-Settings.json`, so an update of the game never undoes it. A hidden field keeps its value.
 
 ---
 
