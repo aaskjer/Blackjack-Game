@@ -18,11 +18,20 @@ Enable the commands in streamer.bot's `Commands` tab. They arrive switched off, 
 
 Right-click `Test` in the trigger section and choose `Test Trigger` to open the settings window.
 
+The first time, a small dialog asks whether to download `UIFramework.dll` — the settings window itself, shared by
+all of these chat games and kept at [aaskjer/UIFramework-Streamer.bot](https://github.com/aaskjer/UIFramework-Streamer.bot).
+`Yes` fetches it (about 190 KB, checked against its published hash) into `UIFramework\lib\<version>\` next to
+Streamer.bot and opens the window. `No` opens that folder instead, for when you would rather drop the file in by hand
+from the [releases](https://github.com/aaskjer/UIFramework-Streamer.bot/releases). When a newer window is released
+the same dialog comes back once; `Cancel` skips that version.
+
 <p align="center"><img alt="The Table page of the settings window" src="Assets/screenshots/settings-table.png" width="460"></p>
 
 Work through the pages in the rail, save, and you are playing. The game reads its settings fresh on every command, so nothing needs restarting.
 
 Three pages are worth a look before the first hand: **Table** for the stakes and the dealer, **Access** for the points variable and who may play, and **Messages** if you want the game to sound like your channel. Every chat line there comes with a live preview, filled in the way chat will see it.
+
+The pencil at the bottom left opens the customise mode: rename, reorder, hide or move pages and fields by drag and drop or from their context menu, pick an accent colour, and the window keeps that layout in `uiframework.layout.json` next to the settings — through every update of the game.
 
 <p align="center"><img alt="The Messages page with its chat preview" src="Assets/screenshots/settings-messages.png" width="460"></p>
 
