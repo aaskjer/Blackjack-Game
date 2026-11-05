@@ -339,6 +339,10 @@ Either of the first two overwrites the name on the Access page automatically. Fo
 
 House Mode stays shut while it is on.
 
+**Q: Can a moderator switch Free Game from chat?**
+
+Yes: `!SetFreeBlackjack` turns it on and `!EndFreeBlackjack` turns it off. The two commands come with the import, disabled and for Moderators; enable them in Streamer.bot's Commands tab. The switch is written into the settings file, so the window's pill shows it, chat gets the **Started** or **Ended** line, and your own actions can listen to `BJG: Free Game Start` and `BJG: Free Game End`. An action of your own can do the same with an Execute C# Method on `StartFreeGame` or `EndFreeGame` of the game action.
+
 ---
 
 **Q: What does the blackjack payout change?**
