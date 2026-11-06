@@ -10,7 +10,7 @@ Click `Import` in [streamer.bot](https://streamer.bot/) and drag the [BlackjackG
 
 <p align="center"><img alt="grafik" src="https://github.com/user-attachments/assets/19cc11ee-647e-401a-aafd-cde610918e6b"> </p>
 
-Enable the commands in streamer.bot's `Commands` tab. They arrive switched off, so nothing answers chat until you do.
+Enable the commands in streamer.bot's `Commands` tab. They arrive switched off, so nothing answers chat until you do. `!SetFreeBlackjack` and `!EndFreeBlackjack` (moderators) switch Free Game from chat; enable them if you want that.
 
 # Setup
 
