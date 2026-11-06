@@ -43,6 +43,8 @@ Connect streamer.bot to OBS, set the connection number, scene and source name on
 
 Adding the source by hand works too: a Browser Source with **Local file** ticked, pointing at `blackjack_overlay.html` in the overlay folder. A source that points at a `file:///` address works as well, OBS 33 included.
 
+To see it before anyone plays: `Try the demo` opens the overlay in your browser and plays sample hands, from a solo hand to a duel and a House table, in the look you saved. Add `&demo=1` to the source's URL in OBS to place and size it the same way, and take it off again afterwards. `Show a sample round` plays one made-up hand on the overlay that is live in OBS for about ten seconds; nobody's points move, and while a game is running the overlay is left to it.
+
 ## Examples
 
 ### Duel challenge

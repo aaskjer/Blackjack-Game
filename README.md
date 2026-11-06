@@ -47,7 +47,7 @@ against a single dealer hand. The game answers on whichever platform the command
   instead of waiting for the next chat command.
 - 📺 **An overlay with real cards.** Card faces, deal animations, a VS layout for duels, seats curved around
   the dealer and countdown rings on open prompts. It runs as a local file or from a web server, OBS 33
-  included.
+  included. *Try the demo* plays sample hands in your browser, *Show a sample round* plays one on stream.
 - 🆓 **Free Game from chat.** `!SetFreeBlackjack` and `!EndFreeBlackjack` (moderators) switch Free Game, with a
   line to chat and a custom trigger each.
 - 🔔 **Hooks for your own actions.** Custom triggers for every settled hand, duel and House seat, with the hand as
