@@ -467,6 +467,7 @@ overlay: cannot read the table state` — together with the address it was loade
 - The overlay reads `blackjack_state.js` out of its own folder, so the files have to sit together. Change the setting rather than moving the HTML by hand.
 - Run any Blackjack command once. The state file is written by the game, so a fresh install has nothing to show until the first hand.
 - Refresh the browser source cache in OBS after the first install.
+- Press **Show a sample round** on the Overlay page: it plays one made-up hand on the overlay for about ten seconds. If that shows, the source and the folder are fine and the overlay is only waiting for a hand.
 
 **Local file** ticked is still the recommended way to add it, but the overlay no longer depends on it: it also works when the
 browser source points at the file through a `file:///` address, which used to leave it blank.
