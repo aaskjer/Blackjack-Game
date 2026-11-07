@@ -55,6 +55,11 @@ against a single dealer hand. The game answers on whichever platform the command
 - 💬 **169 chat lines, 50 stat variables.** Every message is editable with a live preview. Stats live in
   persisted `bjg_*` user variables, and the leaderboard ranks combined lifetime net from table and duels.
 
+<p align="center">
+  <img src="https://github.com/aaskjer/Blackjack-Game/blob/main/Assets/screenshots/overlay-house.png?raw=true" alt="A House table on the overlay" width="49%">
+  <img src="https://github.com/aaskjer/Blackjack-Game/blob/main/Assets/readme/settings-table.png?raw=true" alt="The Table page of the settings window" width="49%">
+</p>
+
 ---
 
 ## Credits
