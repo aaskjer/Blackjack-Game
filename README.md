@@ -55,23 +55,10 @@ against a single dealer hand. The game answers on whichever platform the command
 - 💬 **169 chat lines, 50 stat variables.** Every message is editable with a live preview. Stats live in
   persisted `bjg_*` user variables, and the leaderboard ranks combined lifetime net from table and duels.
 
----
-
-## ⚙️ Settings window
-
-The settings action opens a window from [UIFramework for streamer.bot](https://github.com/aaskjer/UIFramework-Streamer.bot),
-a separate DLL that is fetched automatically.
-
-- **First open:** a dialog asks whether to download `UIFramework.dll` from the framework's GitHub release into
-  `<Streamer.bot>\UIFramework\lib\`. The file is checked against its published SHA-256 before it is used. *No*
-  opens that folder so you can put the DLL there yourself; *Cancel* leaves everything as it is.
-- **Updates:** when a newer framework release is out, the window asks before it downloads anything. *Cancel* skips
-  that version for good.
-- **Turning the update check off:** put `"autoUpdate": false` into `uiframework.layout.json`, next to the settings
-  file `<Streamer.bot>\Chat Games\Blackjack Game\BJG-Settings.json` (create it as `{ "autoUpdate": false }` if it is not there yet). The window then
-  opens with the DLL it has and asks nothing.
-- **Without the window:** the game itself never loads the DLL. Disable the settings action and the game plays on
-  with its settings file, which you can still edit by hand.
+<p align="center">
+  <img src="https://github.com/aaskjer/Blackjack-Game/blob/main/Assets/screenshots/overlay-house.png?raw=true" alt="A House table on the overlay" width="49%">
+  <img src="https://github.com/aaskjer/Blackjack-Game/blob/main/Assets/readme/settings-table.png?raw=true" alt="The Table page of the settings window" width="49%">
+</p>
 
 ---
 
