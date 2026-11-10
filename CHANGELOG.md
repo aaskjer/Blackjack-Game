@@ -11,6 +11,10 @@ Everything worth knowing about, newest first.
   `blackjackRules` (a rule set by name or number, or `random`); it sets `blackjackTableOpened` and
   `blackjackRulesName`. No cooldown applies and the rule menu is never asked; with a table already open, nothing
   opens and chat hears nothing.
+- **Triggers and methods on the Help page.** The page now ends with every custom trigger and its arguments, and
+  the methods for your own actions. *Fire with sample values* under a trigger fires it once, so an action of
+  yours that listens to it can be tried without playing. Needs UIFramework 1.6.0, which the settings fetch by
+  themselves.
 
 ## [17.4.0] - 2026-11-08
 
