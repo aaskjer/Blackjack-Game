@@ -343,6 +343,10 @@ House Mode stays shut while it is on.
 
 Yes: `!SetFreeBlackjack` turns it on and `!EndFreeBlackjack` turns it off. The two commands come with the import, disabled and for Moderators; enable them in Streamer.bot's Commands tab. The switch is written into the settings file, so the window's pill shows it, chat gets the **Started** or **Ended** line, and your own actions can listen to `BJG: Free Game Start` and `BJG: Free Game End`. An action of your own can do the same with an Execute C# Method on `StartFreeGame` or `EndFreeGame` of the game action.
 
+**Q: Can one of my own actions open a House Mode table?**
+
+Yes, from v17.5.0: add an **Execute C# Method** sub-action to any action, pick the `Blackjack Game` action's code and the method `StartHouseTable`. A hotkey, a Stream Deck button, a raid or a channel point reward of your own then opens a table everybody can sit down at, with no cooldown. Only House Mode is started this way; solo hands and duels stay with their commands. Two optional arguments, set before it: `blackjackPlatform` (`twitch`, `youtube` or `kick`; without it the chat the event came from, or Twitch) and `blackjackRules` (a rule set by name or number, or `random`; without it the first one on offer). The rule menu is never asked, since nobody may be there to answer it. The table is opened in the name of the viewer the event carries, or the broadcaster. Afterwards `blackjackTableOpened` says whether a table opened and `blackjackRulesName` which rules it plays. With a table already open, House Mode off, Free Game on or no rule set on offer, nothing opens, nothing is said in chat and the method returns false, which stops the rest of your action.
+
 ---
 
 **Q: What does the blackjack payout change?**

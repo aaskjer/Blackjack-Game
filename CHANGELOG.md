@@ -2,6 +2,20 @@
 
 Everything worth knowing about, newest first.
 
+## [17.5.0] - 2026-11-10
+
+### Added
+
+- **`StartHouseTable` for your own actions.** An Execute C# Method sub-action on the game action opens a House
+  Mode table from any action: a hotkey, a Stream Deck button, a raid. Optional arguments `blackjackPlatform` and
+  `blackjackRules` (a rule set by name or number, or `random`); it sets `blackjackTableOpened` and
+  `blackjackRulesName`. No cooldown applies and the rule menu is never asked; with a table already open, nothing
+  opens and chat hears nothing.
+- **Triggers and methods on the Help page.** The page now ends with every custom trigger and its arguments, and
+  the methods for your own actions. *Fire with sample values* under a trigger fires it once, so an action of
+  yours that listens to it can be tried without playing. Needs UIFramework 1.6.0, which the settings fetch by
+  themselves.
+
 ## [17.4.0] - 2026-11-08
 
 ### Added
