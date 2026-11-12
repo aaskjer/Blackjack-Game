@@ -2,6 +2,31 @@
 
 Everything worth knowing about, newest first.
 
+## [17.5.3] - 2026-11-12
+
+### Added
+
+- **aaskjer on Twitch** is back among the links of the About page.
+
+### Changed
+
+- **The update question says when Streamer.bot needs a restart.** A newer UIFramework can be used at once only
+  while none is running in your Streamer.bot; otherwise it takes effect after a restart. The dialog now says which
+  of the two it is, and after such a download a note says it again: restart when it suits you, everything goes on
+  as before until then.
+- **Closing the update question means "not now".** *Yes* takes the new UIFramework, *No* skips that version, and
+  *Cancel*, the X and Esc ask again at the next open. Closing the dialog used to skip the version for good.
+- **A skipped version is skipped in every game.** It is kept once, in `UIFramework\loader.json` beside
+  Streamer.bot, and so is `"autoUpdate": false`. What a game's `uiframework.layout.json` holds is still read.
+- The settings action is 0.3.1, the host block UIFramework 1.9.0's. Nothing in your settings changes.
+
+### Fixed
+
+- **A download GitHub does not deliver is tried three times** before the settings action gives up.
+- **No answer from the game shows as no answer.** A Try button said "done" and a table showed as empty when the
+  game action did not answer.
+- **A late answer is not taken for the next one.** Every request to the game has a variable of its own.
+
 ## [17.5.2] - 2026-11-12
 
 ### Fixed
