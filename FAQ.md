@@ -39,7 +39,7 @@ The overlay folder is the one piece you can move; see the Overlay section below.
 
 The settings window is no longer part of the import. It lives in [UIFramework for streamer.bot](https://github.com/aaskjer/UIFramework-Streamer.bot), one window shared by all of these chat games, so a fix or a new feature there reaches every game at once. The `[BJG] - Settings` action only loads that DLL and hands it the game's settings table.
 
-The first open asks before fetching anything. `Yes` downloads the file from the UIFramework releases, checks it against the SHA-256 published next to it and puts it in `UIFramework\lib\<version>\` under your Streamer.bot folder. `No` opens that folder so you can place the file yourself. Later releases are offered the same way; `Cancel` skips one, and `"autoUpdate": false` in `uiframework.layout.json` stops the check altogether. The running DLL is never overwritten — a new one goes into its own version folder and is used from the next start.
+The first open asks before fetching anything. `Yes` downloads the file from the UIFramework releases, checks it against the SHA-256 published next to it and puts it in `UIFramework\lib\<version>\` under your Streamer.bot folder. `No` opens that folder so you can place the file yourself. Later releases are offered in a dialog of their own: `Yes` takes one, `No` skips it, `Cancel` asks again at the next open, and the dialog says whether Streamer.bot has to be restarted for it. A `UIFramework\loader.json` under your Streamer.bot folder holding `{ "autoUpdate": false }` stops the check for every game. The running DLL is never overwritten — a new one goes into its own version folder and is used from the next start.
 
 ---
 
