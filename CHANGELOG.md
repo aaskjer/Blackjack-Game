@@ -2,6 +2,16 @@
 
 Everything worth knowing about, newest first.
 
+## [17.5.1] - 2026-11-11
+
+### Fixed
+
+- **Four messages offer the placeholders the game fills.** *Everyone* and *Per player* (the cooldown replies),
+  *Not enough points* and *No stats yet* showed chips the game does not know ({user}, {remaining}, {amount}, ...)
+  or none at all, and the chat preview left their real ones as raw braces. A chip clicked into a cooldown reply
+  kept that reply from being sent. They now offer {0} and {1}, {points}, {available} and {required}, and {user},
+  and the preview fills them. Saved texts stay as they are.
+
 ## [17.5.0] - 2026-11-10
 
 ### Added
