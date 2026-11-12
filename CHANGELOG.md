@@ -2,6 +2,20 @@
 
 Everything worth knowing about, newest first.
 
+## [17.5.2] - 2026-11-12
+
+### Fixed
+
+- **The settings action passes over a UIFramework it is too old for.** Every game in a Streamer.bot shares the
+  installed UIFramework.dll. Should a later one need a newer settings action than this game's, the action now
+  leaves that file alone and opens the window with an older one that fits, with a line in the log; it used to
+  load whatever was newest. (Settings action 0.2.1.)
+
+### Changed
+
+- The host block is UIFramework 1.8.4's: a setting that holds a number too large for 64 bits is read instead of
+  failing.
+
 ## [17.5.1] - 2026-11-11
 
 ### Fixed
