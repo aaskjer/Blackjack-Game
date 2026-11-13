@@ -315,7 +315,7 @@ Yes, twice over. They count towards the hands, wins and net at the front of the 
 
 **Q: Who can open a table?**
 
-Whoever the Streamer.bot trigger lets. The script does not check for itself, so set the permission on the `!house` and `deal` commands if you want them kept to moderators.
+Whoever the Streamer.bot command lets. `!house` comes with the import for moderators only, `deal` for everyone; the script does not check for itself, so change the permission on either command in Streamer.bot's `Commands` tab if you want it otherwise.
 
 ---
 
@@ -417,7 +417,7 @@ The Messages page has its own **bot account** and **send as /me** switches for c
 
 **Q: Can I change what the game says?**
 
-All 169 lines, on the Messages page. Pick one from the list, edit it, and the preview underneath shows how it will read in chat — filled in with sample values, sent from the account and in the style your switches are set to.
+All 171 lines, on the Messages page. Pick one from the list, edit it, and the preview underneath shows how it will read in chat — filled in with sample values, sent from the account and in the style your switches are set to.
 
 The chips under the editor are that message's placeholders; clicking one drops it in at the cursor. A placeholder the game does not fill for that particular line is not offered, so the preview cannot promise something chat will never see.
 
