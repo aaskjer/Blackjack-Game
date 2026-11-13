@@ -39,7 +39,7 @@ The overlay folder is the one piece you can move; see the Overlay section below.
 
 The settings window is no longer part of the import. It lives in [UIFramework for streamer.bot](https://github.com/aaskjer/UIFramework-Streamer.bot), one window shared by all of these chat games, so a fix or a new feature there reaches every game at once. The `[BJG] - Settings` action only loads that DLL and hands it the game's settings table.
 
-The first open asks before fetching anything. `Yes` downloads the file from the UIFramework releases, checks it against the SHA-256 published next to it and puts it in `UIFramework\lib\<version>\` under your Streamer.bot folder. `No` opens that folder so you can place the file yourself. Later releases are offered the same way; `Cancel` skips one, and `"autoUpdate": false` in `uiframework.layout.json` stops the check altogether. The running DLL is never overwritten — a new one goes into its own version folder and is used from the next start.
+The first open asks before fetching anything. `Yes` downloads the file from the UIFramework releases, checks it against the SHA-256 published next to it and puts it in `UIFramework\lib\<version>\` under your Streamer.bot folder. `No` opens that folder so you can place the file yourself. Later releases are offered in a dialog of their own: `Yes` takes one, `No` skips it, `Cancel` asks again at the next open, and the dialog says whether Streamer.bot has to be restarted for it. A `UIFramework\loader.json` under your Streamer.bot folder holding `{ "autoUpdate": false }` stops the check for every game. The running DLL is never overwritten — a new one goes into its own version folder and is used from the next start.
 
 ---
 
@@ -315,7 +315,7 @@ Yes, twice over. They count towards the hands, wins and net at the front of the 
 
 **Q: Who can open a table?**
 
-Whoever the Streamer.bot trigger lets. The script does not check for itself, so set the permission on the `!house` and `deal` commands if you want them kept to moderators.
+Whoever the Streamer.bot command lets. `!house` comes with the import for moderators only, `deal` for everyone; the script does not check for itself, so change the permission on either command in Streamer.bot's `Commands` tab if you want it otherwise.
 
 ---
 
@@ -417,7 +417,7 @@ The Messages page has its own **bot account** and **send as /me** switches for c
 
 **Q: Can I change what the game says?**
 
-All 169 lines, on the Messages page. Pick one from the list, edit it, and the preview underneath shows how it will read in chat — filled in with sample values, sent from the account and in the style your switches are set to.
+All 171 lines, on the Messages page. Pick one from the list, edit it, and the preview underneath shows how it will read in chat — filled in with sample values, sent from the account and in the style your switches are set to.
 
 The chips under the editor are that message's placeholders; clicking one drops it in at the cursor. A placeholder the game does not fill for that particular line is not offered, so the preview cannot promise something chat will never see.
 

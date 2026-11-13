@@ -2,6 +2,99 @@
 
 Everything worth knowing about, newest first.
 
+## [17.5.4] - 2026-11-13
+
+### Fixed
+
+Points that were lost or made up:
+
+- **`quit` and the timeout after a split hand back only what is still open.** Both used to return every hand's
+  stake, the ones already settled included: a busted first hand came back in full, a won one was paid twice.
+- **The payout cut takes from the winnings only.** It took its share of the whole return, stake included, so at
+  50% a win only gave the stake back and above that a win was a loss. The House table did the same; duels were
+  right.
+- **Switching Free Game mid-hand no longer moves points.** A hand, a duel and a challenge keep the mode they started
+  in: a duel played for points pays out after `!SetFreeBlackjack`, a challenge's stake comes back after it, and a
+  free hand quit after `!EndFreeBlackjack` returns nothing it never took. Closing Streamer.bot hands back what was
+  taken the same way.
+- **Closing Streamer.bot while a House table takes seats returns the seats' bets.** They used to be lost.
+- **`!SetFreeBlackjack` leaves a settings file it cannot read alone.** It used to write the switch alone over it,
+  resetting every other setting and pushing the last good save out of the `.bak`. It now says so in the log, and
+  saving once in the window repairs the file.
+- **A payout landing while `!blackjack` deals is kept.** The balance is read again just before the stake is taken.
+- **`quit` is for everyone.** The import gave the command to moderators only.
+- **Duel raises check the raiser too.** Points spent elsewhere after asking to double or split could be staked
+  without being there; the same goes for sudden death.
+- **A hand that cannot be dealt returns its stake.**
+
+The rules:
+
+- **Without a peek the dealer's blackjack counts.** A natural against an Ace or a ten waits for the dealer's second
+  card and pushes on a dealer blackjack; a 21 from more cards loses to one instead of going to a tie-break. In House
+  Mode the European table does the same.
+- **Insurance is always settled.** Without a peek a hand that ended in a bust or a 5-card Charlie kept the insurance
+  stake without a word; it is now paid or lost on the dealer's second card. Once the dealer has peeked it is no longer
+  offered.
+- **Split hands that tie are settled last.** A tie-break's extra dealer cards changed what the other hands were
+  compared with.
+- **A split A+10 in a duel is 21, not blackjack.**
+- **Surrender keeps the odd point for the house**: a bet of 1 no longer surrenders for free.
+- `1,5k` is 1,500 and `0,5k` is 500 (the comma read as a thousands separator: 15,000). `1,500` stays 1,500.
+- Free Game lets a viewer without points play, `!blackjack all` included.
+- **Accepting a duel checks the House table and your own challenge**, and a challenged player cannot take a seat
+  meanwhile. A second duel used to overwrite the first, which then could not be played. Accepting your own challenge
+  is refused too.
+- The games-per-hour limit follows *Duels count toward Games per hour* for both players.
+
+Stats and triggers:
+
+- **A push counts its stake as returned.** `netProfit` dropped by the stake on every push.
+- **A split round counts once** in `gamesPlayed`, and `!stats` gives the win rate over hands: it could pass 100%.
+- **Free Game records no amounts**, losses included; a free duel moves no duel points.
+- **A House surrender counts as a lost hand**, and House insurance and quit fire *BJG: Hand Settled* and *BJG: House
+  Hand Settled* like everything else.
+- `bjg_userName` is no longer overwritten with the name of whoever settled the table.
+- **The weekly reset follows ISO weeks**: around New Year it fired up to three times in eight days.
+
+The rest:
+
+- **The cooldown replies cannot break**: a `{user}` or a brace in them made them fail silently. `{user}` now works
+  there too.
+- **The overlay clears a finished hand.** The next hand's cards deal in again, a refreshed source no longer replays
+  an old result, and a House table picking its rules waits behind a running hand instead of an empty table.
+- **The demo explains how to place it in OBS**: untick Local file and use the overlay's `file:///` address with
+  `?demo=1`; `&demo=1` did nothing.
+- *Create the browser source in OBS* and *Reset the leaderboard now* use the values in the window, saved or not, and
+  the OBS setup writes the overlay into the folder it points the source at.
+- The shoe keeps its size after a rare emergency reshuffle; settings that could not be read are logged; the shared
+  tables are read under the lock.
+- The *Resplit* help no longer says split Aces can be split again.
+
+## [17.5.3] - 2026-11-12
+
+### Added
+
+- **aaskjer on Twitch** is back among the links of the About page.
+
+### Changed
+
+- **The update question says when Streamer.bot needs a restart.** A newer UIFramework can be used at once only
+  while none is running in your Streamer.bot; otherwise it takes effect after a restart. The dialog now says which
+  of the two it is, and after such a download a note says it again: restart when it suits you, everything goes on
+  as before until then.
+- **Closing the update question means "not now".** *Yes* takes the new UIFramework, *No* skips that version, and
+  *Cancel*, the X and Esc ask again at the next open. Closing the dialog used to skip the version for good.
+- **A skipped version is skipped in every game.** It is kept once, in `UIFramework\loader.json` beside
+  Streamer.bot, and so is `"autoUpdate": false`. What a game's `uiframework.layout.json` holds is still read.
+- The settings action is 0.3.1, the host block UIFramework 1.9.0's. Nothing in your settings changes.
+
+### Fixed
+
+- **A download GitHub does not deliver is tried three times** before the settings action gives up.
+- **No answer from the game shows as no answer.** A Try button said "done" and a table showed as empty when the
+  game action did not answer.
+- **A late answer is not taken for the next one.** Every request to the game has a variable of its own.
+
 ## [17.5.2] - 2026-11-12
 
 ### Fixed
