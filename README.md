@@ -52,7 +52,7 @@ against a single dealer hand. The game answers on whichever platform the command
   line to chat and a custom trigger each.
 - 🔔 **Hooks for your own actions.** Custom triggers for every settled hand, duel and House seat, with the hand as
   arguments.
-- 💬 **169 chat lines, 50 stat variables.** Every message is editable with a live preview. Stats live in
+- 💬 **171 chat lines, 50 stat variables.** Every message is editable with a live preview. Stats live in
   persisted `bjg_*` user variables, and the leaderboard ranks combined lifetime net from table and duels.
 
 <p align="center">
