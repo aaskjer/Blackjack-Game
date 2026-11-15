@@ -4,6 +4,17 @@ Everything worth knowing about, newest first.
 
 ## [17.5.4] - 2026-11-13
 
+### Added
+
+- **The settings window in French and Brazilian Portuguese.** Its language picker offers English, German, Spanish,
+  French and Brazilian Portuguese. The window's own texts and the settings every chat game shares come in all five,
+  the game's own settings in English and German.
+
+### Changed
+
+- The settings action is 0.3.2, the host block UIFramework 2.0.0's. The window offers UIFramework 2.0.0 on its next
+  open. Nothing in your settings changes.
+
 ### Fixed
 
 Points that were lost or made up:
@@ -69,6 +80,20 @@ The rest:
 - The shoe keeps its size after a rare emergency reshuffle; settings that could not be read are logged; the shared
   tables are read under the lock.
 - The *Resplit* help no longer says split Aces can be split again.
+
+The settings window:
+
+- **The cooldown replies' *Bot account* and *Send as /me* have their switches**, on the Messages page. The window
+  showed none for them.
+- **A hand dealt while you save reads the saved settings.** For the moment the window swapped the new file in, the
+  game read the defaults.
+- *Fire with sample values* on the Help page no longer freezes the window while the game answers something else.
+- The Log page's folder button opens `Chat Games\Logs` beside Streamer.bot, and lines written in the same second
+  show newest first.
+- **A UIFramework installed for a newer game no longer locks this window.** The update notice at Streamer.bot's
+  start loads only a UIFramework this settings action fits and passes over a damaged one, and the settings action
+  leaves a running one alone that needs a newer settings action. A download that breaks off midway is tried again
+  too.
 
 ## [17.5.3] - 2026-11-12
 
